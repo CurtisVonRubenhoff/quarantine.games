@@ -3,9 +3,8 @@ body {
   padding: 0px;
 }
 
-main {
-  padding-top: 60px;
-  padding-left: 20px;
+.nav-menu {
+  z-index: -1000;
 }
 
 .mdc-card-content {
@@ -14,4 +13,25 @@ main {
 
 .game-card {
   padding: 16px;
+}
+
+.mdc-drawer-app-content {
+  flex: auto;
+  overflow: auto;
+  position: relative;
+}
+
+.main-content {
+  overflow: auto;
+  height: 100%;
+}
+
+.app-bar {
+  position: absolute;
+}
+
+#main-content {
+  background-image: url("./img/curls.png");
+  background-attachment: fixed;
+  background-repeat: repeat;
 }

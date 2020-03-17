@@ -14,49 +14,95 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <header class="mdc-top-app-bar">
-      <div class="mdc-top-app-bar__row">
-        <section
-          class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start"
-        >
-          <button
-            class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button"
+    <body>
+      <aside
+        class="mdc-drawer mdc-drawer--dismissible mdc-top-app-bar--fixed-adjust"
+      >
+        <div class="mdc-drawer__content">
+          <div class="mdc-list">
+            <a
+              class="mdc-list-item mdc-list-item--activated"
+              href="stock_rider/"
+              aria-current="page"
+            >
+              <i
+                class="material-icons mdc-list-item__graphic"
+                aria-hidden="true"
+                >inbox</i
+              >
+              <span class="mdc-list-item__text">Stock Racer</span>
+            </a>
+          </div>
+        </div>
+      </aside>
+      <header class="mdc-top-app-bar app-bar" id="app-bar">
+        <div class="mdc-top-app-bar__row">
+          <section
+            class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start"
           >
-            menu
-          </button>
-          <span class="mdc-top-app-bar__title">quarantine.games</span>
-        </section>
-        <section
-          class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end"
-          role="toolbar"
-        ></section>
-      </div>
-    </header>
-    <main>
-        <div class="mdc-layout-grid">
-            <div class="mdc-layout-grid__inner">
-              <div class="mdc-layout-grid__cell">
-                  <div class="mdc-card game-card">
-                      <div class="mdc-card__primary-action game-card__primary-action" tabindex="0">
-                        <div class="mdc-card__media mdc-card__media--16-9 game-card__media" style="background-image: url(&quot./img/stocks.png&quot);"></div>
+            <span class="mdc-top-app-bar__title">quarantine.games</span>
+          </section>
+        </div>
+      </header>
+
+      <div class="mdc-drawer-app-content mdc-top-app-bar--fixed-adjust">
+        <main class="main-content" id="main-content">
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                  <div class="mdc-layout-grid__cell">
+                    <div id="stock_rider" class="mdc-card game-card">
+                      <div
+                        class="mdc-card__primary-action game-card__primary-action"
+                        tabindex="0"
+                      >
+                        <div
+                          class="mdc-card__media mdc-card__media--16-9 game-card__media"
+                          style="background-image: url(&quot./img/stocks.png&quot);"
+                        ></div>
                         <div class="game-card__primary">
-                          <h2 class="game-card__title mdc-typography mdc-typography--headline6">Stock Rider</h2>
+                          <h2
+                            class="game-card__title mdc-typography mdc-typography--headline6"
+                          >
+                            Stock Rider
+                          </h2>
                         </div>
-                        <div class="game-card__secondary mdc-typography mdc-typography--body2">Ride along the latest closing prices of any stock on the market.</div>
+                        <div
+                          class="game-card__secondary mdc-typography mdc-typography--body2"
+                        >
+                          Ride along the latest closing prices of any stock on the
+                          market.
+                        </div>
                       </div>
                       <div class="mdc-card__actions">
                         <div class="mdc-card__action-buttons">
-                          <a class="mdc-button mdc-card__action mdc-card__action--button" href="stock_rider/">  <span class="mdc-button__ripple"></span> Play</a>
+                          <a
+                            class="mdc-button mdc-card__action mdc-card__action--button"
+                            href="stock_rider/"
+                          >
+                            <span class="mdc-button__ripple"></span> Play</a
+                          >
                         </div>
                       </div>
                     </div>
+                  </div>
+                  <div class="mdc-layout-grid__cell"></div>
+                  <div class="mdc-layout-grid__cell"></div>
+                </div>
               </div>
-              <div class="mdc-layout-grid__cell"></div>
-              <div class="mdc-layout-grid__cell"></div>
-            </div>
-          </div>
-    </main>
-  </body>
+        </main>
+      </div>
+    <script>
+      const drawer = mdc.drawer.MDCDrawer.attachTo(
+        document.querySelector(".mdc-drawer")
+      );
 
-   
+      const topAppBar = mdc.topAppBar.MDCTopAppBar.attachTo(
+        document.getElementById("app-bar")
+      );
+      topAppBar.setScrollTarget(document.getElementById("main-content"));
+      topAppBar.listen("MDCTopAppBar:nav", () => {
+        drawer.open = !drawer.open;
+      });
+    </script>
+  </body>
 </html>
