@@ -2,3 +2,16 @@ body {
   margin: 0px;
   padding: 0px;
 }
+
+main {
+  padding-top: 60px;
+  padding-left: 20px;
+}
+
+.mdc-card-content {
+  padding: 16px;
+}
+
+.game-card {
+  padding: 16px;
+}

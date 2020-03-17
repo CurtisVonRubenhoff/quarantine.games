@@ -32,112 +32,31 @@
         ></section>
       </div>
     </header>
-
-    <script>
-      const SCREEN_WIDTH = 800
-      const SCREEN_HEIGHT = 600
-      function httpGet(theUrl) {
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("GET", theUrl, false); // false for synchronous request
-        xmlHttp.send(null);
-        return xmlHttp.responseText;
-      }
-
-      var config = {
-        type: Phaser.AUTO,
-        width: SCREEN_WIDTH,
-        height: SCREEN_HEIGHT,
-        physics: {
-          default: "arcade",
-          arcade: {
-            gravity: { y: 200 }
-          }
-        },
-        scene: {
-          preload: preload,
-          create: create
-        }
-      };
-
-      var game = new Phaser.Game(config);
-      let dataPoints = [];
-      var lines = [];
-
-      function preload() {
-        this.load.setBaseURL("http://labs.phaser.io");
-
-        this.load.image("sky", "assets/skies/space3.png");
-        this.load.image("logo", "assets/sprites/phaser3-logo.png");
-        this.load.image("red", "assets/particles/red.png");
-
-        const jsonData = httpGet(
-          "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=DJIA&interval=5min&apikey=RRK89HCB2UIPLVHO"
-        );
-        const stockData = JSON.parse(jsonData)["Time Series (5min)"];
-        for (let [key, value] of Object.entries(stockData)) {
-          dataPoints.push({
-            datetime: luxon.DateTime.fromFormat(key, "yyyy-mm-dd HH:mm:ss"),
-            open: value["1. open"],
-            high: value["2. high"],
-            low: value["3. low"],
-            close: value["4. close"],
-            volume: value["5. volume"]
-          });
-        }
-
-        console.log(dataPoints);
-
-        createLines();
-      }
-
-      function createLines() {
-        for (var i = 0; i < dataPoints.length; i++) {
-          if (!(i + 1 === dataPoints.length)) {
-            const {datetime, open, high, low, close, volume} = dataPoints[i]
-            const nextPoint = dataPoints[i+1]
-            
-            lines.push(new Line(
-                (
-                  (i+1)/100 * SCREEN_WIDTH
-                ), 
-                (
-                  close/50000 * SCREEN_HEIGHT
-                ),
-                (
-                  (i+1)/100 * SCREEN_WIDTH
-                ), 
-                (
-                  nextPoint.close/50000 * SCREEN_HEIGHT
-                ),
-              )
-            )
-          }
-        }
-      }
-
-      function render() {
-        lines.forEach((line) => {game.debug.lineInfo(line, 32, 32)});
-      }
-
-      function create() {
-        this.add.image(400, 300, "sky");
-
-        var particles = this.add.particles("red");
-
-        var emitter = particles.createEmitter({
-          speed: 100,
-          scale: { start: 1, end: 0 },
-          blendMode: "ADD"
-        });
-
-        var logo = this.physics.add.image(400, 100, "logo");
-
-        logo.setVelocity(100, 200);
-        logo.setBounce(1, 1);
-        logo.setCollideWorldBounds(true);
-
-        emitter.startFollow(logo);
-      }
-    </script>
+    <main>
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+              <div class="mdc-layout-grid__cell">
+                  <div class="mdc-card game-card">
+                      <div class="mdc-card__primary-action game-card__primary-action" tabindex="0">
+                        <div class="mdc-card__media mdc-card__media--16-9 game-card__media" style="background-image: url(&quot./img/stocks.png&quot);"></div>
+                        <div class="game-card__primary">
+                          <h2 class="game-card__title mdc-typography mdc-typography--headline6">Stock Rider</h2>
+                        </div>
+                        <div class="game-card__secondary mdc-typography mdc-typography--body2">Ride along the latest closing prices of any stock on the market.</div>
+                      </div>
+                      <div class="mdc-card__actions">
+                        <div class="mdc-card__action-buttons">
+                          <a class="mdc-button mdc-card__action mdc-card__action--button" href="stock_rider/">  <span class="mdc-button__ripple"></span> Play</a>
+                        </div>
+                      </div>
+                    </div>
+              </div>
+              <div class="mdc-layout-grid__cell"></div>
+              <div class="mdc-layout-grid__cell"></div>
+            </div>
+          </div>
+    </main>
   </body>
+
+   
 </html>
