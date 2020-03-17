@@ -6,7 +6,10 @@ body {
 .nav-menu {
   z-index: -1000;
 }
-
+.mdc-top-app-bar {
+  --mdc-theme-primary: #181917;
+  --mdc-theme-on-primary: var(--mdc-theme-text-primary-on-dark);
+}
 .mdc-card-content {
   padding: 16px;
 }
